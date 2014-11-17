@@ -22,6 +22,9 @@ public class PMovePull : MonoBehaviour
 	public Material GreenMaterial;
 	public Material WhiteMaterial;
 
+	public float distance;
+	public float distanceAbility;
+
 	void Start ()
 	{
 		Player = GameObject.FindGameObjectWithTag("Player");
@@ -30,6 +33,7 @@ public class PMovePull : MonoBehaviour
 		GreenCapsule = "GreenCapsule";
 
 		speed = 5f;
+		distanceAbility = 7f;
 
 		MClickOver = false;
 		MagnetAbility = false;
@@ -106,7 +110,10 @@ public class PMovePull : MonoBehaviour
 		{
 			Debug.DrawLine(ray.origin, hit.point);
 			Debug.Log("Hit object: " + hit.collider);
-			if (hit.collider.gameObject.tag.ToString() == "Magnet")
+
+			distance = Vector3.Distance (hit.collider.gameObject.transform.position, Player.transform.position);
+
+			if (hit.collider.gameObject.tag.ToString() == "Magnet" && distance <= distanceAbility)
 			{
 				Debug.Log("Magnetizirahme se :))");
 				Player.rigidbody.useGravity = false;
@@ -114,6 +121,7 @@ public class PMovePull : MonoBehaviour
 				MClickOver = true;
 			}
 		}
+
 	}
 
 	void MagnitUpdate()
