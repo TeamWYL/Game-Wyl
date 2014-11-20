@@ -10,31 +10,26 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			Vector3 position = this.transform.position;
-			position.x = position.x - speed;
-			this.transform.position = position;
-		}
-		if (Input.GetKey(KeyCode.RightArrow))
-		{
-			Vector3 position = this.transform.position;
-			position.x = position.x + speed;
-			this.transform.position = position;
-		}
 
-	
-	}
 
-//	void FixedUpdate()
-//	{
+	void Update()
+	{
 //		float moveHorizontal = Input.GetAxis("Vertical");
-//		float moveVertical = Input.GetAxis("Horizontal");
-//
+		float moveVertical = Input.GetAxisRaw("Horizontal");
+
 //		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-//
-//		rigidbody.AddForce(movement * speed * Time.deltaTime);
-//	}
+
+		//rigidbody.AddForce(movement * speed * Time.deltaTime);
+		//Vector3 jump = Vector3.zero;
+		float jump = 7;
+		if (Input.GetKeyDown("space")) {
+			rigidbody.AddForce(Vector3.up * jump, ForceMode.Impulse);
+
+				}
+		transform.position += new Vector3 (moveVertical,0,0)*speed;
+
+
+
+	}
 
 }
